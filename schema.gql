@@ -3,7 +3,10 @@
 # ------------------------------------------------------
 
 type SpecialAttack {
-  """came of the special attack"""
+  """id of the special attack"""
+  _id: String!
+
+  """name of the special attack"""
   name: String!
 
   """description of the special attack"""
@@ -46,6 +49,9 @@ input CreateChampionInput {
 
   """class of the champion"""
   class_power: String!
+
+  """special attacks of the champion"""
+  special_attacks: [String!]!
 }
 
 input UpdateChampionInput {
@@ -54,6 +60,9 @@ input UpdateChampionInput {
 
   """class of the champion"""
   class_power: String
+
+  """special attacks of the champion"""
+  special_attacks: [String!]
   id: Int!
 }
 

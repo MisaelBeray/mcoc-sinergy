@@ -1,4 +1,4 @@
-import { Model, FilterQuery, QueryOptions } from 'mongoose';
+import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
 import { CreateChampionInput } from './dto/create-champion.input';
 import { UpdateChampionInput } from './dto/update-champion.input';
@@ -11,14 +11,14 @@ export class ChampionsService {
     private championModel: Model<Champion>,
   ) {}
 
-  async create(createChampionInput: CreateChampionInput): Promise<CreateChampionInput> {
+  async create(createChampionInput: CreateChampionInput): Promise<Champion> {
     const createChampion = new this.championModel(createChampionInput);
 
-    return createChampion.save();
+    return (await createChampion.save()).populate('special_attacks');
   }
 
   async find(): Promise<Champion[]> {
-    return this.championModel.find().lean();
+    return await this.championModel.find().populate('special_attacks').lean();
   }
 
   findOne(id: number) {

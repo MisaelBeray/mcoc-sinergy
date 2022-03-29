@@ -1,14 +1,9 @@
-import { InputType, Field, Int } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
 import {
   IsString,
   MaxLength,
   MinLength,
-  IsOptional,
-  IsInt,
-  IsMongoId,
 } from 'class-validator';
-import mongoose from 'mongoose';
-import { SpecialAttack } from '../../special-attacks/entities/special-attack.entity';
 @InputType()
 export class CreateChampionInput {
   @IsString()
@@ -24,8 +19,8 @@ export class CreateChampionInput {
   class_power: string;
 
   @IsString()
-  @Field(() => [mongoose.Schema.Types.ObjectId], {
+  @Field(() => [String], {
     description: 'special attacks of the champion',
   })
-  special_attacks: [mongoose.Schema.Types.ObjectId];
+  special_attacks: string[];
 }

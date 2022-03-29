@@ -1,10 +1,9 @@
-import { InputType, Field, Int } from '@nestjs/graphql';
+import { InputType, Field} from '@nestjs/graphql';
 import {
   IsString,
   MaxLength,
   MinLength,
 } from 'class-validator';
-import mongoose from 'mongoose';
 
 @InputType()
 export class CreateSpecialAttackInput {
