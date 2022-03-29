@@ -1,0 +1,39 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Champion {
+  """Name of the champion"""
+  name: String!
+
+  """Class of the champion"""
+  classPower: String!
+}
+
+type Query {
+  champions: [Champion!]!
+  champion(id: Int!): Champion!
+}
+
+type Mutation {
+  createChampion(createChampionInput: CreateChampionInput!): Champion!
+  updateChampion(updateChampionInput: UpdateChampionInput!): Champion!
+  removeChampion(id: Int!): Champion!
+}
+
+input CreateChampionInput {
+  """name of the champion"""
+  name: String!
+
+  """class of the champion"""
+  classPower: String!
+}
+
+input UpdateChampionInput {
+  """name of the champion"""
+  name: String
+
+  """class of the champion"""
+  classPower: String
+  id: Int!
+}
