@@ -2,23 +2,42 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Champion {
-  """Name of the champion"""
+type SpecialAttack {
+  """came of the special attack"""
   name: String!
 
-  """Class of the champion"""
-  classPower: String!
+  """description of the special attack"""
+  description: String!
+
+  """status of the special attack"""
+  status: String!
+}
+
+type Champion {
+  """name of the champion"""
+  name: String!
+
+  """class of the champion"""
+  class_power: String!
+
+  """special attack of the champion"""
+  special_attacks: [SpecialAttack!]!
 }
 
 type Query {
   champions: [Champion!]!
   champion(id: Int!): Champion!
+  specialAttacks: [SpecialAttack!]!
+  specialAttack(id: Int!): SpecialAttack!
 }
 
 type Mutation {
   createChampion(createChampionInput: CreateChampionInput!): Champion!
   updateChampion(updateChampionInput: UpdateChampionInput!): Champion!
   removeChampion(id: Int!): Champion!
+  createSpecialAttack(createSpecialAttackInput: CreateSpecialAttackInput!): SpecialAttack!
+  updateSpecialAttack(updateSpecialAttackInput: UpdateSpecialAttackInput!): SpecialAttack!
+  removeSpecialAttack(id: Int!): SpecialAttack!
 }
 
 input CreateChampionInput {
@@ -26,7 +45,7 @@ input CreateChampionInput {
   name: String!
 
   """class of the champion"""
-  classPower: String!
+  class_power: String!
 }
 
 input UpdateChampionInput {
@@ -34,6 +53,29 @@ input UpdateChampionInput {
   name: String
 
   """class of the champion"""
-  classPower: String
+  class_power: String
+  id: Int!
+}
+
+input CreateSpecialAttackInput {
+  """name of the special attack"""
+  name: String!
+
+  """description of the special attack"""
+  description: String!
+
+  """status of the special attack"""
+  status: String!
+}
+
+input UpdateSpecialAttackInput {
+  """name of the special attack"""
+  name: String
+
+  """description of the special attack"""
+  description: String
+
+  """status of the special attack"""
+  status: String
   id: Int!
 }

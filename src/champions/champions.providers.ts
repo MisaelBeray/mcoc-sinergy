@@ -1,11 +1,11 @@
 import { Connection } from 'mongoose';
-import { ChampionsSchema } from './entities/champion.entity';
+import { championsSchema } from './entities/champion.entity';
 
 export const championsProviders = [
   {
     provide: 'CHAMPIONS_MODEL',
     useFactory: (connection: Connection) =>
-      connection.model('Champions', ChampionsSchema),
+      connection.model('Champions', championsSchema),
     inject: ['DATABASE_CONNECTION'],
   },
 ];

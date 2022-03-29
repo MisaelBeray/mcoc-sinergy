@@ -5,8 +5,10 @@ import {
   MinLength,
   IsOptional,
   IsInt,
+  IsMongoId,
 } from 'class-validator';
-
+import mongoose from 'mongoose';
+import { SpecialAttack } from '../../special-attacks/entities/special-attack.entity';
 @InputType()
 export class CreateChampionInput {
   @IsString()
@@ -19,6 +21,11 @@ export class CreateChampionInput {
   @MinLength(9)
   @MaxLength(15)
   @Field(() => String, { description: 'class of the champion' })
-  classPower: string;
+  class_power: string;
 
+  @IsString()
+  @Field(() => [mongoose.Schema.Types.ObjectId], {
+    description: 'special attacks of the champion',
+  })
+  special_attacks: [mongoose.Schema.Types.ObjectId];
 }
