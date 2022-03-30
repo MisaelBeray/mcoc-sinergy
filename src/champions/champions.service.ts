@@ -17,10 +17,12 @@ export class ChampionsService {
     return (
       await (
         await (
-          await (await createChampion.save()).populate('special_attacks')
-        ).populate('styles_of_combat')
-      ).populate('attributes')
-    ).populate('organizations');
+          await (
+            await (await createChampion.save()).populate('special_attacks')
+          ).populate('styles_of_combat')
+        ).populate('attributes')
+      ).populate('organizations')
+    ).populate('skills');
   }
 
   async find(): Promise<Champion[]> {
@@ -30,6 +32,7 @@ export class ChampionsService {
       .populate('styles_of_combat')
       .populate('attributes')
       .populate('organizations')
+      .populate('skills')
       .lean();
   }
 

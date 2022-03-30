@@ -24,6 +24,14 @@ type Tag {
   name: String!
 }
 
+type Skill {
+  """id of the skill"""
+  _id: String!
+
+  """name of the skill"""
+  name: String!
+}
+
 type Champion {
   """id of the champion"""
   _id: String!
@@ -46,6 +54,9 @@ type Champion {
   """organizations of the champion"""
   organizations: [Tag!]!
 
+  """skills of the champion"""
+  skills: [Skill!]!
+
   """profile of the champion"""
   profile: String
 }
@@ -57,6 +68,8 @@ type Query {
   specialAttack(id: Int!): SpecialAttack!
   tags: [Tag!]!
   tag(id: Int!): Tag!
+  skills: [Skill!]!
+  skill(id: Int!): Skill!
 }
 
 type Mutation {
@@ -69,6 +82,9 @@ type Mutation {
   createTag(createTagInput: CreateTagInput!): Tag!
   updateTag(updateTagInput: UpdateTagInput!): Tag!
   removeTag(id: Int!): Tag!
+  createSkill(createSkillInput: CreateSkillInput!): Skill!
+  updateSkill(updateSkillInput: UpdateSkillInput!): Skill!
+  removeSkill(id: Int!): Skill!
 }
 
 input CreateChampionInput {
@@ -89,6 +105,9 @@ input CreateChampionInput {
 
   """organizations of the champion"""
   organizations: [String!]!
+
+  """skills of the champion"""
+  skills: [String!]!
 
   """profile of the champion"""
   profile: String!
@@ -112,6 +131,9 @@ input UpdateChampionInput {
 
   """organizations of the champion"""
   organizations: [String!]
+
+  """skills of the champion"""
+  skills: [String!]
 
   """profile of the champion"""
   profile: String
@@ -148,6 +170,17 @@ input CreateTagInput {
 
 input UpdateTagInput {
   """name of the tag"""
+  name: String
+  id: Int!
+}
+
+input CreateSkillInput {
+  """name of the skill"""
+  name: String!
+}
+
+input UpdateSkillInput {
+  """name of the skill"""
   name: String
   id: Int!
 }

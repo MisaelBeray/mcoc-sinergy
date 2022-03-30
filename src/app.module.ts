@@ -14,6 +14,7 @@ import { SpecialAttacksService } from './special-attacks/special-attacks.service
 import { SpecialAttacksResolver } from './special-attacks/special-attacks.resolver';
 import { specialAttacksProviders } from './special-attacks/special-attacks.providers';
 import { TagsModule } from './tags/tags.module';
+import { SkillsModule } from './skills/skills.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { TagsModule } from './tags/tags.module';
     DatabaseModule,
     SpecialAttacksModule,
     TagsModule,
+    SkillsModule,
   ],
   controllers: [AppController],
   providers: [

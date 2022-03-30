@@ -46,6 +46,13 @@ export class CreateChampionInput {
   })
   organizations: string[];
 
+  @IsString()
+  @IsOptional()
+  @Field(() => [String], {
+    description: 'skills of the champion',
+  })
+  skills: string[];
+
   @IsOptional()
   @IsString()
   @MinLength(9)

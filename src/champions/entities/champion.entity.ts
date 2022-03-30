@@ -3,6 +3,7 @@ import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import { SpecialAttack } from '../../special-attacks/entities/special-attack.entity';
 import { Tag } from '../../tags/entities/tag.entity';
+import { Skill } from '../../skills/entities/skill.entity';
 import { Prop } from '@nestjs/mongoose';
 
 export const championsSchema = new mongoose.Schema({
@@ -14,6 +15,7 @@ export const championsSchema = new mongoose.Schema({
   styles_of_combat: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tags' }],
   attributes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tags' }],
   organizations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tags' }],
+  skills: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Skills' }],
   profile: String,
 });
 
@@ -51,6 +53,12 @@ export class Champion extends Document {
   })
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Tags' })
   organizations: Tag[];
+
+  @Field(() => [Skill], {
+    description: 'skills of the champion'
+  })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Skills' })
+  skills: Skill[];
 
   @Field(() => String, {
     description: 'profile of the champion',
