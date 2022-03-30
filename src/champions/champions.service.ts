@@ -14,11 +14,23 @@ export class ChampionsService {
   async create(createChampionInput: CreateChampionInput): Promise<Champion> {
     const createChampion = new this.championModel(createChampionInput);
 
-    return (await createChampion.save()).populate('special_attacks');
+    return (
+      await (
+        await (
+          await (await createChampion.save()).populate('special_attacks')
+        ).populate('styles_of_combat')
+      ).populate('attributes')
+    ).populate('organizations');
   }
 
   async find(): Promise<Champion[]> {
-    return await this.championModel.find().populate('special_attacks').lean();
+    return await this.championModel
+      .find()
+      .populate('special_attacks')
+      .populate('styles_of_combat')
+      .populate('attributes')
+      .populate('organizations')
+      .lean();
   }
 
   findOne(id: number) {

@@ -16,7 +16,18 @@ type SpecialAttack {
   status: String!
 }
 
+type Tag {
+  """id of the tag"""
+  _id: String!
+
+  """name of the tag"""
+  name: String!
+}
+
 type Champion {
+  """id of the champion"""
+  _id: String!
+
   """name of the champion"""
   name: String!
 
@@ -25,6 +36,18 @@ type Champion {
 
   """special attack of the champion"""
   special_attacks: [SpecialAttack!]!
+
+  """styles combat of the champion"""
+  styles_of_combat: [Tag!]!
+
+  """attributes of the champion"""
+  attributes: [Tag!]!
+
+  """organizations of the champion"""
+  organizations: [Tag!]!
+
+  """profile of the champion"""
+  profile: String
 }
 
 type Query {
@@ -32,6 +55,8 @@ type Query {
   champion(id: Int!): Champion!
   specialAttacks: [SpecialAttack!]!
   specialAttack(id: Int!): SpecialAttack!
+  tags: [Tag!]!
+  tag(id: Int!): Tag!
 }
 
 type Mutation {
@@ -41,6 +66,9 @@ type Mutation {
   createSpecialAttack(createSpecialAttackInput: CreateSpecialAttackInput!): SpecialAttack!
   updateSpecialAttack(updateSpecialAttackInput: UpdateSpecialAttackInput!): SpecialAttack!
   removeSpecialAttack(id: Int!): SpecialAttack!
+  createTag(createTagInput: CreateTagInput!): Tag!
+  updateTag(updateTagInput: UpdateTagInput!): Tag!
+  removeTag(id: Int!): Tag!
 }
 
 input CreateChampionInput {
@@ -52,6 +80,18 @@ input CreateChampionInput {
 
   """special attacks of the champion"""
   special_attacks: [String!]!
+
+  """styles combat of the champion"""
+  styles_of_combat: [String!]!
+
+  """styles combat of the champion"""
+  attributes: [String!]!
+
+  """organizations of the champion"""
+  organizations: [String!]!
+
+  """profile of the champion"""
+  profile: String!
 }
 
 input UpdateChampionInput {
@@ -63,6 +103,18 @@ input UpdateChampionInput {
 
   """special attacks of the champion"""
   special_attacks: [String!]
+
+  """styles combat of the champion"""
+  styles_of_combat: [String!]
+
+  """styles combat of the champion"""
+  attributes: [String!]
+
+  """organizations of the champion"""
+  organizations: [String!]
+
+  """profile of the champion"""
+  profile: String
   id: Int!
 }
 
@@ -86,5 +138,16 @@ input UpdateSpecialAttackInput {
 
   """status of the special attack"""
   status: String
+  id: Int!
+}
+
+input CreateTagInput {
+  """name of the tag"""
+  name: String!
+}
+
+input UpdateTagInput {
+  """name of the tag"""
+  name: String
   id: Int!
 }

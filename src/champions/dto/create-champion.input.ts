@@ -1,5 +1,6 @@
 import { InputType, Field } from '@nestjs/graphql';
 import {
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -23,4 +24,31 @@ export class CreateChampionInput {
     description: 'special attacks of the champion',
   })
   special_attacks: string[];
+
+  @IsString()
+  @IsOptional()
+  @Field(() => [String], {
+    description: 'styles combat of the champion',
+  })
+  styles_of_combat: string[];
+
+  @IsString()
+  @IsOptional()
+  @Field(() => [String], {
+    description: 'styles combat of the champion',
+  })
+  attributes: string[];
+
+  @IsString()
+  @IsOptional()
+  @Field(() => [String], {
+    description: 'organizations of the champion',
+  })
+  organizations: string[];
+
+  @IsOptional()
+  @IsString()
+  @MinLength(9)
+  @Field(() => String, { description: 'profile of the champion' })
+  profile: string;
 }

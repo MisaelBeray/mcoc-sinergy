@@ -13,6 +13,7 @@ import { SpecialAttacksModule } from './special-attacks/special-attacks.module';
 import { SpecialAttacksService } from './special-attacks/special-attacks.service';
 import { SpecialAttacksResolver } from './special-attacks/special-attacks.resolver';
 import { specialAttacksProviders } from './special-attacks/special-attacks.providers';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { specialAttacksProviders } from './special-attacks/special-attacks.provi
     ChampionsModule,
     DatabaseModule,
     SpecialAttacksModule,
+    TagsModule,
   ],
   controllers: [AppController],
   providers: [
