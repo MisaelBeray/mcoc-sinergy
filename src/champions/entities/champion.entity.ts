@@ -4,6 +4,7 @@ import { Document } from 'mongoose';
 import { SpecialAttack } from '../../special-attacks/entities/special-attack.entity';
 import { Tag } from '../../tags/entities/tag.entity';
 import { Skill } from '../../skills/entities/skill.entity';
+import { Sinergy } from '../../sinergies/entities/sinergy.entity';
 import { Prop } from '@nestjs/mongoose';
 
 export const championsSchema = new mongoose.Schema({
@@ -16,6 +17,7 @@ export const championsSchema = new mongoose.Schema({
   attributes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tags' }],
   organizations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tags' }],
   skills: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Skills' }],
+  sinergies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sinergies' }],
   profile: String,
 });
 
@@ -59,6 +61,12 @@ export class Champion extends Document {
   })
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Skills' })
   skills: Skill[];
+
+  @Field(() => [Sinergy], {
+    description: 'sinergies of the champion'
+  })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Sinergies' })
+  sinergies: Sinergy[];
 
   @Field(() => String, {
     description: 'profile of the champion',

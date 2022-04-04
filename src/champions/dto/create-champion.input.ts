@@ -53,6 +53,13 @@ export class CreateChampionInput {
   })
   skills: string[];
 
+  @IsString()
+  @IsOptional()
+  @Field(() => [String], {
+    description: 'sinergies of the champion',
+  })
+  sinergies: string[];
+
   @IsOptional()
   @IsString()
   @MinLength(9)

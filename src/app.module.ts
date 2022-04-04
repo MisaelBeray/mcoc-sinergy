@@ -15,6 +15,7 @@ import { SpecialAttacksResolver } from './special-attacks/special-attacks.resolv
 import { specialAttacksProviders } from './special-attacks/special-attacks.providers';
 import { TagsModule } from './tags/tags.module';
 import { SkillsModule } from './skills/skills.module';
+import { SinergiesModule } from './sinergies/sinergies.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { SkillsModule } from './skills/skills.module';
     SpecialAttacksModule,
     TagsModule,
     SkillsModule,
+    SinergiesModule,
   ],
   controllers: [AppController],
   providers: [
