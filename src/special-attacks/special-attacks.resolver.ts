@@ -19,7 +19,7 @@ export class SpecialAttacksResolver {
   }
 
   @Query(() => SpecialAttack, { name: 'specialAttack' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => String }) id: string) {
     return this.specialAttacksService.findOne(id);
   }
 

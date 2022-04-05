@@ -80,15 +80,15 @@ type Champion {
 
 type Query {
   champions: [Champion!]!
-  champion(id: Int!): Champion!
+  champion(id: String!): Champion!
   specialAttacks: [SpecialAttack!]!
-  specialAttack(id: Int!): SpecialAttack!
+  specialAttack(id: String!): SpecialAttack!
   tags: [Tag!]!
-  tag(id: Int!): Tag!
+  tag(id: String!): Tag!
   skills: [Skill!]!
-  skill(id: Int!): Skill!
+  skill(id: String!): Skill!
   sinergies: [Sinergy!]!
-  sinergy(id: Int!): Sinergy!
+  sinergy(id: String!): Sinergy!
 }
 
 type Mutation {

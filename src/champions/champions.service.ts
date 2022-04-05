@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { CreateChampionInput } from './dto/create-champion.input';
 import { UpdateChampionInput } from './dto/update-champion.input';
 import { Champion } from './entities/champion.entity';
@@ -39,8 +39,13 @@ export class ChampionsService {
       .lean();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} champion`;
+  async findOne(id: string) {
+    const champion = this.championModel.findById(id).exec()
+
+    if (!champion) {
+      throw new NotFoundException('champion not found')
+    }
+    return champion
   }
 
   update(id: number, updateChampionInput: UpdateChampionInput) {

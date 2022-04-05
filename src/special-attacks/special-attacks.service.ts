@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { CreateSpecialAttackInput } from './dto/create-special-attack.input';
 import { UpdateSpecialAttackInput } from './dto/update-special-attack.input';
 import { SpecialAttack } from './entities/special-attack.entity';
@@ -21,8 +21,13 @@ export class SpecialAttacksService {
     return this.specialAttackModel.find().lean();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} specialAttack`;
+  async findOne(id: string) {
+    const specialAttack = this.specialAttackModel.findById(id).exec()
+
+    if (!specialAttack) {
+      throw new NotFoundException('specialAttack not found')
+    }
+    return specialAttack
   }
 
   update(id: number, updateSpecialAttackInput: UpdateSpecialAttackInput) {

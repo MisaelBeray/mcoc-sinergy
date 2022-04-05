@@ -20,7 +20,7 @@ export class TagsResolver {
 
 
   @Query(() => Tag, { name: 'tag' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => String }) id: string) {
     return this.tagsService.findOne(id);
   }
 

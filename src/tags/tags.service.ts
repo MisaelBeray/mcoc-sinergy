@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { CreateTagInput } from './dto/create-tag.input';
 import { UpdateTagInput } from './dto/update-tag.input';
 import { Tag } from './entities/tag.entity';
@@ -21,8 +21,13 @@ export class TagsService {
     return await this.tagModel.find().lean();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tag`;
+  async findOne(id: string) {
+    const tag = this.tagModel.findById(id).exec()
+
+    if (!tag) {
+      throw new NotFoundException('tag not found')
+    }
+    return tag
   }
 
   update(id: number, updateTagInput: UpdateTagInput) {

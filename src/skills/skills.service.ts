@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { CreateSkillInput } from './dto/create-skill.input';
 import { UpdateSkillInput } from './dto/update-skill.input';
 import { Skill } from './entities/skill.entity';
@@ -21,8 +21,13 @@ export class SkillsService {
     return await this.skillModel.find().lean();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} skill`;
+  async findOne(id: string) {
+    const skill = this.skillModel.findById(id).exec()
+
+    if (!skill) {
+      throw new NotFoundException('skill not found')
+    }
+    return skill
   }
 
   update(id: number, updateSkillInput: UpdateSkillInput) {
