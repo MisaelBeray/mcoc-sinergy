@@ -1,8 +1,10 @@
-import { CreateSpecialAttackInput } from './create-special-attack.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { CreateSpecialAttackInput } from './create-special-attack.input'
+import { InputType, PartialType, Field } from '@nestjs/graphql'
+import { IsString } from 'class-validator'
 
 @InputType()
 export class UpdateSpecialAttackInput extends PartialType(CreateSpecialAttackInput) {
-  @Field(() => Int)
-  id: number;
+  @IsString()
+  @Field(() => String, { description: "special attack's id" })
+  id: string
 }

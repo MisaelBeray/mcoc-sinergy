@@ -30,8 +30,13 @@ export class TagsService {
     return tag
   }
 
-  update(id: number, updateTagInput: UpdateTagInput) {
-    return `This action updates a #${id} tag`;
+  async update(id: string, updateTagInput: UpdateTagInput) {
+    const tag = this.tagModel.findByIdAndUpdate(id, updateTagInput).exec()
+
+    if (!tag) {
+      throw new NotFoundException("tag doesn't exist")
+    }
+    return tag
   }
 
   remove(id: number) {

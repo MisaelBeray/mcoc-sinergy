@@ -1,8 +1,10 @@
-import { CreateSkillInput } from './create-skill.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { CreateSkillInput } from './create-skill.input'
+import { InputType, PartialType, Field } from '@nestjs/graphql'
+import { IsString } from 'class-validator'
 
 @InputType()
 export class UpdateSkillInput extends PartialType(CreateSkillInput) {
-  @Field(() => Int)
-  id: number;
+  @IsString()
+  @Field(() => String, { description: "skill's id" })
+  id: string
 }

@@ -30,8 +30,13 @@ export class SpecialAttacksService {
     return specialAttack
   }
 
-  update(id: number, updateSpecialAttackInput: UpdateSpecialAttackInput) {
-    return `This action updates a #${id} specialAttack`;
+  async update(id: string, updateSpecialAttackInput: UpdateSpecialAttackInput) {
+    const specialAttack = this.specialAttackModel.findByIdAndUpdate(id, updateSpecialAttackInput).exec()
+
+    if (!specialAttack) {
+      throw new NotFoundException("special attack doesn't exist")
+    }
+    return specialAttack
   }
 
   remove(id: number) {

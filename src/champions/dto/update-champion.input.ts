@@ -1,8 +1,10 @@
-import { CreateChampionInput } from './create-champion.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { CreateChampionInput } from './create-champion.input'
+import { InputType, PartialType, Field } from '@nestjs/graphql'
+import { IsString } from 'class-validator'
 
 @InputType()
 export class UpdateChampionInput extends PartialType(CreateChampionInput) {
-  @Field(() => Int)
-  id: number;
+  @IsString()
+  @Field(() => String, { description: "champion's id" })
+  id: string
 }

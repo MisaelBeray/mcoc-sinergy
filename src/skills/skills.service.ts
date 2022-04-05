@@ -30,8 +30,13 @@ export class SkillsService {
     return skill
   }
 
-  update(id: number, updateSkillInput: UpdateSkillInput) {
-    return `This action updates a #${id} skill`;
+  async update(id: string, updateSkillInput: UpdateSkillInput) {
+    const skill = this.skillModel.findByIdAndUpdate(id, updateSkillInput).exec()
+
+    if (!skill) {
+      throw new NotFoundException("skill doesn't exist")
+    }
+    return skill
   }
 
   remove(id: number) {

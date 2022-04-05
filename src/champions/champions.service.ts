@@ -48,8 +48,13 @@ export class ChampionsService {
     return champion
   }
 
-  update(id: number, updateChampionInput: UpdateChampionInput) {
-    return `This action updates a #${id} champion`;
+  async update(id: string, updateChampionInput: UpdateChampionInput) {
+    const champion = this.championModel.findByIdAndUpdate(id, updateChampionInput).exec()
+
+    if (!champion) {
+      throw new NotFoundException("champion doesn't exist")
+    }
+    return champion
   }
 
   remove(id: number) {

@@ -1,8 +1,10 @@
-import { CreateTagInput } from './create-tag.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { CreateTagInput } from './create-tag.input'
+import { InputType, PartialType, Field } from '@nestjs/graphql'
+import { IsString } from 'class-validator'
 
 @InputType()
 export class UpdateTagInput extends PartialType(CreateTagInput) {
-  @Field(() => Int)
-  id: number;
+  @IsString()
+  @Field(() => String, { description: "tag's id" })
+  id: string
 }

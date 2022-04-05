@@ -30,8 +30,13 @@ export class SinergiesService {
     return sinergy
   }
 
-  update(id: number, updateSinergyInput: UpdateSinergyInput) {
-    return `This action updates a #${id} sinergy`;
+  async update(id: string, updateSinergyInput: UpdateSinergyInput) {
+    const sinergy = this.sinergyModel.findByIdAndUpdate(id, updateSinergyInput).exec()
+
+    if (!sinergy) {
+      throw new NotFoundException("sinergy doesn't exist")
+    }
+    return sinergy
   }
 
   remove(id: number) {

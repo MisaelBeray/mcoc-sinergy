@@ -165,7 +165,9 @@ input UpdateChampionInput {
 
   """profile of the champion"""
   profile: String
-  id: Int!
+
+  """champion's id"""
+  id: String!
 }
 
 input CreateSpecialAttackInput {
@@ -188,7 +190,9 @@ input UpdateSpecialAttackInput {
 
   """status of the special attack"""
   status: String
-  id: Int!
+
+  """special attack's id"""
+  id: String!
 }
 
 input CreateTagInput {
@@ -199,7 +203,9 @@ input CreateTagInput {
 input UpdateTagInput {
   """name of the tag"""
   name: String
-  id: Int!
+
+  """tag's id"""
+  id: String!
 }
 
 input CreateSkillInput {
@@ -210,7 +216,9 @@ input CreateSkillInput {
 input UpdateSkillInput {
   """name of the skill"""
   name: String
-  id: Int!
+
+  """skill's id"""
+  id: String!
 }
 
 input CreateSinergyInput {
@@ -233,5 +241,7 @@ input UpdateSinergyInput {
 
   """description of the sinergy"""
   description: String
-  id: Int!
+
+  """sinergy's id"""
+  id: String!
 }
