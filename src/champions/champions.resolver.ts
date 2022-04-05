@@ -15,7 +15,7 @@ export class ChampionsResolver {
 
   @Query(() => [Champion])
   async champions() {
-    return this.championsService.find();
+    return this.championsService.findAll();
   }
 
   @Query(() => Champion, { name: 'champion' })

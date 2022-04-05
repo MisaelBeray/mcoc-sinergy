@@ -15,7 +15,7 @@ export class SpecialAttacksResolver {
 
   @Query(() => [SpecialAttack])
   async specialAttacks() {
-    return this.specialAttacksService.find();
+    return this.specialAttacksService.findAll();
   }
 
   @Query(() => SpecialAttack, { name: 'specialAttack' })

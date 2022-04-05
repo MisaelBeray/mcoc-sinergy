@@ -15,7 +15,7 @@ export class SkillsResolver {
 
   @Query(() => [Skill])
   async skills() {
-    return this.skillsService.find();
+    return this.skillsService.findAll();
   }
 
 

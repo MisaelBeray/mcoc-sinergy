@@ -15,7 +15,7 @@ export class SinergiesResolver {
 
   @Query(() => [Sinergy])
   async sinergies() {
-    return this.sinergiesService.find();
+    return this.sinergiesService.findAll();
   }
 
   @Query(() => Sinergy, { name: 'sinergy' })

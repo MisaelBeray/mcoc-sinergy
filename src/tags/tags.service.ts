@@ -17,7 +17,7 @@ export class TagsService {
     return await createTag.save();
   }
 
-  async find(): Promise<Tag[]> {
+  async findAll(): Promise<Tag[]> {
     return await this.tagModel.find().lean();
   }
 

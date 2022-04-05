@@ -15,7 +15,7 @@ export class TagsResolver {
 
   @Query(() => [Tag])
   async tags() {
-    return this.tagsService.find();
+    return this.tagsService.findAll();
   }
 
 

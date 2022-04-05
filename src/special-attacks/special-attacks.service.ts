@@ -17,7 +17,7 @@ export class SpecialAttacksService {
     return createSpecialAttack.save();
   }
 
-  async find(): Promise<SpecialAttack[]> {
+  async findAll(): Promise<SpecialAttack[]> {
     return this.specialAttackModel.find().lean();
   }
 

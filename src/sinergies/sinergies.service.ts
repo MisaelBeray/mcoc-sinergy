@@ -17,7 +17,7 @@ export class SinergiesService {
     return await createSinergy.save();
   }
 
-  async find(): Promise<Sinergy[]> {
+  async findAll(): Promise<Sinergy[]> {
     return await this.sinergyModel.find().lean();
   }
   findOne(id: number) {

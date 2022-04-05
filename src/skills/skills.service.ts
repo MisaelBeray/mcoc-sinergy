@@ -17,7 +17,7 @@ export class SkillsService {
     return await createSkill.save();
   }
 
-  async find(): Promise<Skill[]> {
+  async findAll(): Promise<Skill[]> {
     return await this.skillModel.find().lean();
   }
 

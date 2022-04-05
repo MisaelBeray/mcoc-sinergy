@@ -27,7 +27,7 @@ export class ChampionsService {
     ).populate('sinergies');
   }
 
-  async find(): Promise<Champion[]> {
+  async findAll(): Promise<Champion[]> {
     return await this.championModel
       .find()
       .populate('special_attacks')
