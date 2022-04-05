@@ -30,7 +30,7 @@ export class SkillsResolver {
   }
 
   @Mutation(() => Skill)
-  removeSkill(@Args('id', { type: () => Int }) id: number) {
+  removeSkill(@Args('id', { type: () => String }) id: string) {
     return this.skillsService.remove(id);
   }
 }

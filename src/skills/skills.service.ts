@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { CreateSkillInput } from './dto/create-skill.input';
 import { UpdateSkillInput } from './dto/update-skill.input';
 import { Skill } from './entities/skill.entity';
@@ -39,7 +39,12 @@ export class SkillsService {
     return skill
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} skill`;
+  async remove(id: string) {
+    const skillDeleted = this.skillModel.findByIdAndRemove(id).exec()
+
+    if (!skillDeleted) {
+      throw new InternalServerErrorException()
+    }
+    return skillDeleted
   }
 }

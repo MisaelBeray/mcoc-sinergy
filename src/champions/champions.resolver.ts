@@ -34,7 +34,7 @@ export class ChampionsResolver {
   }
 
   @Mutation(() => Champion)
-  removeChampion(@Args('id', { type: () => Int }) id: number) {
+  removeChampion(@Args('id', { type: () => String }) id: string) {
     return this.championsService.remove(id);
   }
 }

@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { CreateTagInput } from './dto/create-tag.input';
 import { UpdateTagInput } from './dto/update-tag.input';
 import { Tag } from './entities/tag.entity';
@@ -39,7 +39,12 @@ export class TagsService {
     return tag
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tag`;
+  async remove(id: string) {
+    const tagDeleted = this.tagModel.findByIdAndRemove(id).exec()
+
+    if (!tagDeleted) {
+      throw new InternalServerErrorException()
+    }
+    return tagDeleted
   }
 }

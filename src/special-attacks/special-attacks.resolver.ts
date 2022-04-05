@@ -29,7 +29,7 @@ export class SpecialAttacksResolver {
   }
 
   @Mutation(() => SpecialAttack)
-  removeSpecialAttack(@Args('id', { type: () => Int }) id: number) {
+  removeSpecialAttack(@Args('id', { type: () => String }) id: string) {
     return this.specialAttacksService.remove(id);
   }
 }

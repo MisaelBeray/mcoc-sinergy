@@ -1,4 +1,4 @@
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { CreateSpecialAttackInput } from './dto/create-special-attack.input';
 import { UpdateSpecialAttackInput } from './dto/update-special-attack.input';
 import { SpecialAttack } from './entities/special-attack.entity';
@@ -39,7 +39,12 @@ export class SpecialAttacksService {
     return specialAttack
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} specialAttack`;
+  async remove(id: string) {
+    const specialAttackDeleted = this.specialAttackModel.findByIdAndRemove(id).exec()
+
+    if (!specialAttackDeleted) {
+      throw new InternalServerErrorException()
+    }
+    return specialAttackDeleted
   }
 }

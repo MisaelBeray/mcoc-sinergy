@@ -94,19 +94,19 @@ type Query {
 type Mutation {
   createChampion(createChampionInput: CreateChampionInput!): Champion!
   updateChampion(updateChampionInput: UpdateChampionInput!): Champion!
-  removeChampion(id: Int!): Champion!
+  removeChampion(id: String!): Champion!
   createSpecialAttack(createSpecialAttackInput: CreateSpecialAttackInput!): SpecialAttack!
   updateSpecialAttack(updateSpecialAttackInput: UpdateSpecialAttackInput!): SpecialAttack!
-  removeSpecialAttack(id: Int!): SpecialAttack!
+  removeSpecialAttack(id: String!): SpecialAttack!
   createTag(createTagInput: CreateTagInput!): Tag!
   updateTag(updateTagInput: UpdateTagInput!): Tag!
-  removeTag(id: Int!): Tag!
+  removeTag(id: String!): Tag!
   createSkill(createSkillInput: CreateSkillInput!): Skill!
   updateSkill(updateSkillInput: UpdateSkillInput!): Skill!
-  removeSkill(id: Int!): Skill!
+  removeSkill(id: String!): Skill!
   createSinergy(createSinergyInput: CreateSinergyInput!): Sinergy!
   updateSinergy(updateSinergyInput: UpdateSinergyInput!): Sinergy!
-  removeSinergy(id: Int!): Sinergy!
+  removeSinergy(id: String!): Sinergy!
 }
 
 input CreateChampionInput {

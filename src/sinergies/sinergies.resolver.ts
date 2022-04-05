@@ -29,7 +29,7 @@ export class SinergiesResolver {
   }
 
   @Mutation(() => Sinergy)
-  removeSinergy(@Args('id', { type: () => Int }) id: number) {
+  removeSinergy(@Args('id', { type: () => String }) id: string) {
     return this.sinergiesService.remove(id);
   }
 }

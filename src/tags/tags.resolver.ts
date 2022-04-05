@@ -30,7 +30,7 @@ export class TagsResolver {
   }
 
   @Mutation(() => Tag)
-  removeTag(@Args('id', { type: () => Int }) id: number) {
+  removeTag(@Args('id', { type: () => String }) id: string) {
     return this.tagsService.remove(id);
   }
 }

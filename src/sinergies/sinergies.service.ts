@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { CreateSinergyInput } from './dto/create-sinergy.input';
 import { UpdateSinergyInput } from './dto/update-sinergy.input';
 import { Sinergy } from './entities/sinergy.entity';
@@ -39,7 +39,12 @@ export class SinergiesService {
     return sinergy
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} sinergy`;
+  async remove(id: string) {
+    const sinergyDeleted = this.sinergyModel.findByIdAndRemove(id).exec()
+
+    if (!sinergyDeleted) {
+      throw new InternalServerErrorException()
+    }
+    return sinergyDeleted
   }
 }

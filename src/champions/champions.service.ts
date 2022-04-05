@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { CreateChampionInput } from './dto/create-champion.input';
 import { UpdateChampionInput } from './dto/update-champion.input';
 import { Champion } from './entities/champion.entity';
@@ -57,7 +57,12 @@ export class ChampionsService {
     return champion
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} champion`;
+  async remove(id: string) {
+    const championDeleted = this.championModel.findByIdAndRemove(id).exec()
+
+    if (!championDeleted) {
+      throw new InternalServerErrorException()
+    }
+    return championDeleted
   }
 }
