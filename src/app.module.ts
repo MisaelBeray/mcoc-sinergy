@@ -18,6 +18,8 @@ import { SkillsModule } from './skills/skills.module';
 import { SinergiesModule } from './sinergies/sinergies.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { APP_GUARD } from '@nestjs/core'
+import { GqlJwtAuthGuard } from './common/guards/gql-jwt-auth.guard'
 
 @Module({
   imports: [
@@ -36,6 +38,10 @@ import { UsersModule } from './users/users.module';
   ],
   controllers: [AppController],
   providers: [
+    {
+      provide: APP_GUARD,
+      useClass: GqlJwtAuthGuard
+    },
     AppService,
     ChampionsService,
     ChampionsResolver,

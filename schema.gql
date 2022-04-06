@@ -79,8 +79,8 @@ type Champion {
 }
 
 type Auth {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """JWT authorization token"""
+  token: String!
 }
 
 type User {
@@ -118,7 +118,7 @@ type Query {
   skill(id: String!): Skill!
   sinergies: [Sinergy!]!
   sinergy(id: String!): Sinergy!
-  auth(id: Int!): Auth!
+  whoAmI: User!
   users: [User!]!
   user(id: String!): User!
 }
@@ -139,9 +139,13 @@ type Mutation {
   createSinergy(createSinergyInput: CreateSinergyInput!): Sinergy!
   updateSinergy(updateSinergyInput: UpdateSinergyInput!): Sinergy!
   removeSinergy(id: String!): Sinergy!
-  createAuth(createAuthInput: CreateAuthInput!): Auth!
-  updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
-  removeAuth(id: Int!): Auth!
+  login(
+    """user's login email"""
+    email: String!
+
+    """user's login password"""
+    password: String!
+  ): Auth!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: String!): User!
@@ -282,17 +286,6 @@ input UpdateSinergyInput {
 
   """sinergy's id"""
   id: String!
-}
-
-input CreateAuthInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateAuthInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
 }
 
 input CreateUserInput {

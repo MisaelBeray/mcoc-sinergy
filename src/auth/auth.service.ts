@@ -1,26 +1,39 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthInput } from './dto/create-auth.input';
-import { UpdateAuthInput } from './dto/update-auth.input';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException
+} from '@nestjs/common'
+import { UsersService } from '../users/users.service'
+import { JwtService } from '@nestjs/jwt'
+import * as bcrypt from 'bcrypt'
+import { AuthArgs } from './dto/auth.args'
 
 @Injectable()
 export class AuthService {
-  create(createAuthInput: CreateAuthInput) {
-    return 'This action adds a new auth';
-  }
+  constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService
+  ) {}
 
-  findAll() {
-    return `This action returns all auth`;
-  }
+  async login({ email, password }: AuthArgs): Promise<any> {
+    const user = await this.usersService.findByEmail(email)
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
+    if (!user) {
+      throw new NotFoundException({ message: 'User not found' })
+    }
 
-  update(id: number, updateAuthInput: UpdateAuthInput) {
-    return `This action updates a #${id} auth`;
-  }
+    const { password: encryptedPassword } = user
 
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+    const payload = user.toJSON()
+
+    delete payload.password
+
+    if (await bcrypt.compare(password, encryptedPassword)) {
+      return {
+        token: this.jwtService.sign(payload)
+      }
+    }
+
+    throw new UnauthorizedException()
   }
 }
