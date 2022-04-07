@@ -8,7 +8,7 @@ import { Sinergy } from '../../sinergies/entities/sinergy.entity';
 import { Prop } from '@nestjs/mongoose';
 
 export const championsSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, unique: true },
   class_power: String,
   special_attacks: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'Special_Attacks' },
@@ -26,6 +26,7 @@ export class Champion extends Document {
   @Field(() => String, { description: 'id of the champion' })
   _id: string;
 
+  @Prop({ unique: true })
   @Field(() => String, { description: 'name of the champion' })
   name: string;
 

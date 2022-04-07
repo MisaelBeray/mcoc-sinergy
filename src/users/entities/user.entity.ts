@@ -2,7 +2,6 @@ import { ObjectType, Field } from '@nestjs/graphql';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import { Prop } from '@nestjs/mongoose';
-import { UnionDefinitionFactory } from '@nestjs/graphql/dist/schema-builder/factories/union-definition.factory';
 
 export const usersSchema = new mongoose.Schema({
   email: { type: String, unique: true },
