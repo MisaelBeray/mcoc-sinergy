@@ -3,17 +3,18 @@ import { Injectable, Inject, NotFoundException, InternalServerErrorException } f
 import { CreateChampionInput } from './dto/create-champion.input';
 import { UpdateChampionInput } from './dto/update-champion.input';
 import { Champion } from './entities/champion.entity';
-
+import { SendMailProducesService } from 'src/jobs/sendMail-producer-service';
 @Injectable()
 export class ChampionsService {
   constructor(
+    private sendMailService: SendMailProducesService,
     @Inject('CHAMPIONS_MODEL')
     private championModel: Model<Champion>,
   ) {}
 
   async create(createChampionInput: CreateChampionInput): Promise<Champion> {
     const createChampion = new this.championModel(createChampionInput);
-
+    this.sendMailService.sendMail(createChampion);
     return (
       await (
         await (
