@@ -13,6 +13,7 @@ import { Queue } from 'bull';
 import { MiddlewareBuilder } from '@nestjs/core';
 import { createBullBoard } from 'bull-board';
 import { BullAdapter } from 'bull-board/bullAdapter';
+import { SelectQueue } from 'src/utils/queues.enum'
 @Module({
   imports: [
     DatabaseModule,
@@ -35,7 +36,7 @@ import { BullAdapter } from 'bull-board/bullAdapter';
       },
     }),
     BullModule.registerQueue({
-      name: 'sendMail-queue',
+      name: SelectQueue.sendMailQueue,
     }),
   ],
   providers: [
@@ -47,7 +48,7 @@ import { BullAdapter } from 'bull-board/bullAdapter';
   ],
 })
 export class ChampionsModule {
-  constructor(@InjectQueue('sendMail-queue') private sendMailQueue: Queue) {}
+  constructor(@InjectQueue(SelectQueue.sendMailQueue) private sendMailQueue: Queue) {}
 
   configure(consumer: MiddlewareBuilder) {
     const { router } = createBullBoard([new BullAdapter(this.sendMailQueue)]);

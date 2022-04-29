@@ -8,11 +8,13 @@ import {
 } from '@nestjs/bull';
 import { Job } from 'bull';
 import { Champion } from 'src/champions/entities/champion.entity';
+import { SelectQueue } from 'src/utils/queues.enum'
+import { SelectJobs } from 'src/utils/jobs.enum'
 
-@Processor('sendMail-queue')
+@Processor(SelectQueue.sendMailQueue)
 class SendMailConsumer {
   constructor(private mailService: MailerService) {}
-  @Process('sendMail-job')
+  @Process(SelectJobs.sendMailJob)
   async sendMailJOb(job: Job<Champion>) {
     const { data } = job;
 
