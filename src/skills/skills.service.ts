@@ -1,20 +1,24 @@
 import { Model } from 'mongoose';
-import { Injectable, Inject, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  NotFoundException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { CreateSkillInput } from './dto/create-skill.input';
 import { UpdateSkillInput } from './dto/update-skill.input';
-import { Skill } from './entities/skill.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Skill, SkillDocument } from './schemas/skill.schema';
 
 @Injectable()
 export class SkillsService {
   constructor(
-    @Inject('SKILLS_MODEL')
-    private skillModel: Model<Skill>,
+    @InjectModel(Skill.name)
+    private skillModel: Model<SkillDocument>,
   ) {}
 
   async create(createSkillInput: CreateSkillInput): Promise<Skill> {
-    const createSkill = new this.skillModel(createSkillInput);
-
-    return await createSkill.save();
+    return this.skillModel.create({ ...CreateSkillInput });
   }
 
   async findAll(): Promise<Skill[]> {
@@ -22,29 +26,31 @@ export class SkillsService {
   }
 
   async findOne(id: string) {
-    const skill = this.skillModel.findById(id).exec()
+    const skill = await this.skillModel.findById(id).exec();
 
     if (!skill) {
-      throw new NotFoundException('skill not found')
+      throw new NotFoundException('skill not found');
     }
-    return skill
+    return skill;
   }
 
   async update(id: string, updateSkillInput: UpdateSkillInput) {
-    const skill = this.skillModel.findByIdAndUpdate(id, updateSkillInput).exec()
+    const skill = this.skillModel
+      .findByIdAndUpdate(id, updateSkillInput)
+      .exec();
 
     if (!skill) {
-      throw new NotFoundException("skill doesn't exist")
+      throw new NotFoundException("skill doesn't exist");
     }
-    return skill
+    return skill;
   }
 
   async remove(id: string) {
-    const skillDeleted = this.skillModel.findByIdAndRemove(id).exec()
+    const skillDeleted = this.skillModel.findByIdAndRemove(id).exec();
 
     if (!skillDeleted) {
-      throw new InternalServerErrorException()
+      throw new InternalServerErrorException();
     }
-    return skillDeleted
+    return skillDeleted;
   }
 }
