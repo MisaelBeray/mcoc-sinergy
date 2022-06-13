@@ -1,9 +1,9 @@
 import { InjectQueue } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
-import { Champion } from 'src/champions/entities/champion.entity';
+import { Champion, ChampionDocument } from '../champions/schemas/champions.schema';
 import { Queue } from 'bull';
-import { SelectQueue } from 'src/utils/queues.enum'
-import { SelectJobs } from 'src/utils/jobs.enum'
+import { SelectQueue } from '../utils/queues.enum'
+import { SelectJobs } from '../utils/jobs.enum'
 @Injectable()
 class SendMailProducesService {
   constructor(@InjectQueue(SelectQueue.sendMailQueue) private queue: Queue) {}

@@ -1,20 +1,19 @@
 import { Injectable, Inject, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { CreateSpecialAttackInput } from './dto/create-special-attack.input';
 import { UpdateSpecialAttackInput } from './dto/update-special-attack.input';
-import { SpecialAttack } from './entities/special-attack.entity';
 import { Model } from 'mongoose';
+import { SpecialAttack, SpecialAttackDocument } from './schemas/special-attack.schema';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class SpecialAttacksService {
   constructor(
-    @Inject('SPECIAL_ATTACKS_MODEL')
-    private specialAttackModel: Model<SpecialAttack>,
+    @InjectModel(SpecialAttack.name)
+    private specialAttackModel: Model<SpecialAttackDocument>,
   ) {}
 
   async create(createSpecialAttackInput: CreateSpecialAttackInput): Promise<CreateSpecialAttackInput> {
-    const createSpecialAttack = new this.specialAttackModel(createSpecialAttackInput);
-
-    return createSpecialAttack.save();
+    return this.specialAttackModel.create({ ...createSpecialAttackInput });
   }
 
   async findAll(): Promise<SpecialAttack[]> {

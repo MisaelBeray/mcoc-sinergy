@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { SpecialAttacksService } from './special-attacks.service';
-import { SpecialAttack } from './entities/special-attack.entity';
+import { SpecialAttack } from './schemas/special-attack.schema';
 import { CreateSpecialAttackInput } from './dto/create-special-attack.input';
 import { UpdateSpecialAttackInput } from './dto/update-special-attack.input';
 

@@ -1,20 +1,26 @@
 import { Model } from 'mongoose';
-import { Injectable, Inject, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  NotFoundException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { CreateSinergyInput } from './dto/create-sinergy.input';
 import { UpdateSinergyInput } from './dto/update-sinergy.input';
-import { Sinergy } from './entities/sinergy.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Sinergy, SinergyDocument } from './schemas/sinergy.schema';
 
 @Injectable()
 export class SinergiesService {
   constructor(
-    @Inject('SINERGIES_MODEL')
-    private sinergyModel: Model<Sinergy>,
+    @InjectModel(Sinergy.name)
+    private sinergyModel: Model<SinergyDocument>,
   ) {}
 
-  async create(createSinergyInput: CreateSinergyInput): Promise<Sinergy> {
-    const createSinergy = new this.sinergyModel(createSinergyInput);
-
-    return await createSinergy.save();
+  async create(
+    createSinergyInput: CreateSinergyInput,
+  ): Promise<CreateSinergyInput> {
+    return this.sinergyModel.create({ ...createSinergyInput });
   }
 
   async findAll(): Promise<Sinergy[]> {
@@ -22,29 +28,31 @@ export class SinergiesService {
   }
 
   async findOne(id: string) {
-    const sinergy = this.sinergyModel.findById(id).exec()
+    const sinergy = this.sinergyModel.findById(id).exec();
 
     if (!sinergy) {
-      throw new NotFoundException('sinergy not found')
+      throw new NotFoundException('sinergy not found');
     }
-    return sinergy
+    return sinergy;
   }
 
   async update(id: string, updateSinergyInput: UpdateSinergyInput) {
-    const sinergy = this.sinergyModel.findByIdAndUpdate(id, updateSinergyInput).exec()
+    const sinergy = this.sinergyModel
+      .findByIdAndUpdate(id, updateSinergyInput)
+      .exec();
 
     if (!sinergy) {
-      throw new NotFoundException("sinergy doesn't exist")
+      throw new NotFoundException("sinergy doesn't exist");
     }
-    return sinergy
+    return sinergy;
   }
 
   async remove(id: string) {
-    const sinergyDeleted = this.sinergyModel.findByIdAndRemove(id).exec()
+    const sinergyDeleted = this.sinergyModel.findByIdAndRemove(id).exec();
 
     if (!sinergyDeleted) {
-      throw new InternalServerErrorException()
+      throw new InternalServerErrorException();
     }
-    return sinergyDeleted
+    return sinergyDeleted;
   }
 }

@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { ChampionsService } from './champions.service';
-import { Champion } from './entities/champion.entity';
+import { Champion } from './schemas/champions.schema';
 import { CreateChampionInput } from './dto/create-champion.input';
 import { UpdateChampionInput } from './dto/update-champion.input';
 

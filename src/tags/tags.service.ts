@@ -1,20 +1,24 @@
 import { Model } from 'mongoose';
-import { Injectable, Inject, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  NotFoundException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { CreateTagInput } from './dto/create-tag.input';
 import { UpdateTagInput } from './dto/update-tag.input';
-import { Tag } from './entities/tag.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Tag, TagDocument } from './schemas/tag.schema';
 
 @Injectable()
 export class TagsService {
   constructor(
-    @Inject('TAGS_MODEL')
-    private tagModel: Model<Tag>,
+    @InjectModel(Tag.name)
+    private tagModel: Model<TagDocument>,
   ) {}
 
-  async create(createTagInput: CreateTagInput): Promise<Tag> {
-    const createTag = new this.tagModel(createTagInput);
-
-    return await createTag.save();
+  async create(createTagInput: CreateTagInput): Promise<CreateTagInput> {
+    return this.tagModel.create({ ...createTagInput });
   }
 
   async findAll(): Promise<Tag[]> {
@@ -22,29 +26,29 @@ export class TagsService {
   }
 
   async findOne(id: string) {
-    const tag = this.tagModel.findById(id).exec()
+    const tag = this.tagModel.findById(id).exec();
 
     if (!tag) {
-      throw new NotFoundException('tag not found')
+      throw new NotFoundException('tag not found');
     }
-    return tag
+    return tag;
   }
 
   async update(id: string, updateTagInput: UpdateTagInput) {
-    const tag = this.tagModel.findByIdAndUpdate(id, updateTagInput).exec()
+    const tag = this.tagModel.findByIdAndUpdate(id, updateTagInput).exec();
 
     if (!tag) {
-      throw new NotFoundException("tag doesn't exist")
+      throw new NotFoundException("tag doesn't exist");
     }
-    return tag
+    return tag;
   }
 
   async remove(id: string) {
-    const tagDeleted = this.tagModel.findByIdAndRemove(id).exec()
+    const tagDeleted = this.tagModel.findByIdAndRemove(id).exec();
 
     if (!tagDeleted) {
-      throw new InternalServerErrorException()
+      throw new InternalServerErrorException();
     }
-    return tagDeleted
+    return tagDeleted;
   }
 }

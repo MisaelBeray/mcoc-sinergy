@@ -2,12 +2,15 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ChampionsResolver } from './champions.resolver';
 import { ChampionsService } from './champions.service';
 
-describe('ChampionsResolver', () => {
+describe('SkillsResolver', () => {
   let resolver: ChampionsResolver;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ChampionsResolver, ChampionsService],
+      providers: [
+        ChampionsResolver,
+        { provide: ChampionsService, useValue: {} }
+      ],
     }).compile();
 
     resolver = module.get<ChampionsResolver>(ChampionsResolver);

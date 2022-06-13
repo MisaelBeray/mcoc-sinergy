@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { SinergiesService } from './sinergies.service';
 import { SinergiesResolver } from './sinergies.resolver';
-import { DatabaseModule } from '../database/database.module';
-import { sinergiesProviders } from './sinergies.providers';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Sinergy, SinergySchema } from './schemas/sinergy.schema';
 
 @Module({
-  imports: [DatabaseModule],
-  providers: [SinergiesResolver, SinergiesService, ...sinergiesProviders]
+  imports: [MongooseModule.forFeature([
+    { name: Sinergy.name, schema: SinergySchema }
+  ]),],
+  providers: [SinergiesResolver, SinergiesService]
 })
 export class SinergiesModule {}

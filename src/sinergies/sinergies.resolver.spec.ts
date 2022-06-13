@@ -1,13 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SinergiesResolver } from './sinergies.resolver';
-import { SinergiesService } from './sinergies.service';
+import {SinergiesResolver } from './sinergies.resolver';
+import {SinergiesService } from './sinergies.service';
 
-describe('SinergiesResolver', () => {
+describe('SkillsResolver', () => {
   let resolver: SinergiesResolver;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [SinergiesResolver, SinergiesService],
+      providers: [SinergiesResolver, { provide: SinergiesService, useValue: {} }],
     }).compile();
 
     resolver = module.get<SinergiesResolver>(SinergiesResolver);

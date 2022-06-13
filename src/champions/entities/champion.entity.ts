@@ -1,10 +1,10 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
-import { SpecialAttack } from '../../special-attacks/entities/special-attack.entity';
-import { Tag } from '../../tags/entities/tag.entity';
-import { Skill } from '../../skills/entities/skill.entity';
-import { Sinergy } from '../../sinergies/entities/sinergy.entity';
+import { SpecialAttack } from '../../special-attacks/schemas/special-attack.schema';
+import { Tag } from '../../tags/schemas/tag.schema';
+import { Skill } from '../../skills/schemas/skill.schema';
+import { Sinergy } from '../../sinergies/schemas/sinergy.schema';
 import { Prop } from '@nestjs/mongoose';
 
 export const championsSchema = new mongoose.Schema({

@@ -2,12 +2,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TagsResolver } from './tags.resolver';
 import { TagsService } from './tags.service';
 
-describe('TagsResolver', () => {
+describe('SkillsResolver', () => {
   let resolver: TagsResolver;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [TagsResolver, TagsService],
+      providers: [TagsResolver, { provide: TagsService, useValue: {} }],
     }).compile();
 
     resolver = module.get<TagsResolver>(TagsResolver);

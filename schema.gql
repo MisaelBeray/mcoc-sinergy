@@ -3,79 +3,40 @@
 # ------------------------------------------------------
 
 type SpecialAttack {
-  """id of the special attack"""
   _id: String!
-
-  """name of the special attack"""
   name: String!
-
-  """description of the special attack"""
   description: String!
-
-  """status of the special attack"""
   status: String!
 }
 
 type Tag {
-  """id of the tag"""
   _id: String!
-
-  """name of the tag"""
   name: String!
 }
 
 type Skill {
-  """id of the skill"""
   _id: String!
-
-  """name of the skill"""
   name: String!
 }
 
 type Sinergy {
-  """id of the sinergy"""
   _id: String!
-
-  """name of the sinergy"""
   name: String!
-
-  """champions of the sinergy"""
-  champions: [String!]!
-
-  """description of the sinergy"""
+  champions: String!
   description: String!
 }
 
 type Champion {
-  """id of the champion"""
   _id: String!
-
-  """name of the champion"""
   name: String!
-
-  """class of the champion"""
   class_power: String!
-
-  """special attack of the champion"""
   special_attacks: [SpecialAttack!]!
-
-  """styles combat of the champion"""
   styles_of_combat: [Tag!]!
-
-  """attributes of the champion"""
   attributes: [Tag!]!
-
-  """organizations of the champion"""
   organizations: [Tag!]!
-
-  """skills of the champion"""
   skills: [Skill!]!
-
-  """sinergies of the champion"""
   sinergies: [Sinergy!]!
-
-  """profile of the champion"""
-  profile: String
+  profile: String!
 }
 
 type Auth {

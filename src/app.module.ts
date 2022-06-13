@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { APP_GUARD } from '@nestjs/core'
 import { GqlJwtAuthGuard } from './common/guards/gql-jwt-auth.guard'
+import { MongooseModule } from '@nestjs/mongoose'
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { GqlJwtAuthGuard } from './common/guards/gql-jwt-auth.guard'
       autoSchemaFile: 'schema.gql',
     }),
     ChampionsModule,
-    DatabaseModule,
+    MongooseModule.forRoot(process.env.MONO_DB_CONNECTION_STRING),
     SpecialAttacksModule,
     TagsModule,
     SkillsModule,

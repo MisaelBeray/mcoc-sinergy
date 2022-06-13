@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { SinergiesService } from './sinergies.service';
-import { Sinergy } from './entities/sinergy.entity';
+import { Sinergy } from './schemas/sinergy.schema';
 import { CreateSinergyInput } from './dto/create-sinergy.input';
 import { UpdateSinergyInput } from './dto/update-sinergy.input';
 

@@ -18,7 +18,7 @@ export class SkillsService {
   ) {}
 
   async create(createSkillInput: CreateSkillInput): Promise<Skill> {
-    return this.skillModel.create({ ...CreateSkillInput });
+    return this.skillModel.create({ ...createSkillInput });
   }
 
   async findAll(): Promise<Skill[]> {

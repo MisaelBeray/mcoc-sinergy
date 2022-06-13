@@ -7,9 +7,9 @@ import {
   Processor,
 } from '@nestjs/bull';
 import { Job } from 'bull';
-import { Champion } from 'src/champions/entities/champion.entity';
-import { SelectQueue } from 'src/utils/queues.enum'
-import { SelectJobs } from 'src/utils/jobs.enum'
+import { Champion } from '../champions/entities/champion.entity';
+import { SelectQueue } from '../utils/queues.enum'
+import { SelectJobs } from '../utils/jobs.enum'
 
 @Processor(SelectQueue.sendMailQueue)
 class SendMailConsumer {

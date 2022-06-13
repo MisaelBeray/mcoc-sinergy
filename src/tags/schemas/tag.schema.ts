@@ -2,11 +2,11 @@ import { Field, ObjectType } from '@nestjs/graphql'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 
-export type SkillDocument = Skill & Document
+export type TagDocument = Tag & Document
 
-@Schema()
+@Schema({ collection: 'tags' })
 @ObjectType()
-export class Skill {
+export class Tag {
   @Field(() => String)
   _id: string
 
@@ -16,6 +16,6 @@ export class Skill {
 
 }
 
-export const SkillSchema = SchemaFactory.createForClass<Skill>(
-  Skill
+export const TagSchema = SchemaFactory.createForClass<Tag>(
+  Tag
 )
